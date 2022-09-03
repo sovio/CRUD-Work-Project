@@ -1,0 +1,92 @@
+<div id="form-content">
+    <section>
+        <form [formGroup]="FormValid" (ngSubmit)="loginUser()">
+            <div class="mb-3">
+                <label for="floatingInput" class="form-label fs-2 fw-semibold" name="name">Campaign name<sup>*</sup></label>
+                <p class="validator" *ngIf="campaigNname && campaigNname.invalid && campaigNname.touched"><small style="color: red;">Require input</small></p>
+                <input type="text" class="form-control" formControlName="campaignname" #campaignName>
+            </div>
+            <div class="mb-3">
+                <label for="floatingInput" class="form-label fs-2 fw-semibold" >Tags</label>
+                <input type="text" class="form-control "placeholder= {{TagString}}  #tags>
+            </div>
+            <div class="mb-3">
+                <label for="floatingInput" class="form-label fs-2 fw-semibold">Bid amount<sup>*</sup></label>
+                <p class="validator" *ngIf="bidAmount && bidAmount.invalid && bidAmount.touched"><small style="color: red;">Require input</small></p>
+                <input type="number" class="form-control" formControlName="bidamount"  #bid>
+            </div>
+            <div class="mb-3">
+                <label for="floatingInput" class="form-label fs-2 fw-semibold">Campaign fund<sup>*</sup></label>
+                <p class="validator" *ngIf="campaignFund && campaignFund.invalid && campaignFund.touched"><small style="color: red;">Require input</small></p>
+                <input type="number" class="form-control" formControlName="campaignfund"  #campaignFoud>
+            </div>
+            <div class="form-check form-switch mb-3" id="switch-box">
+                <input class="form-check-input" type="checkbox" role="switch"  #status> 
+                <label class="form-check-label fw-semibold fs-2" for="flexSwitchCheckDefault">Set status<sup>*</sup></label>
+            </div>
+            <div class="mb-3" id="town-switcher">
+                <label class="form-check-label fw-semibold fs-2" for="flexSwitchCheckDefault">Select town</label>
+                <div>
+                    <input type="text" class="form-control"  #townButton disabled>
+                    <button type="button" class="btn btn-md btn-secondary dropdown-toggle dropdown-toggle-split" id="btn-dropdown-town" data-bs-toggle="dropdown" aria-expanded="false" mb-3 >
+                     
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item" *ngFor="let town of TownList" (click)="setButtonName({x: town, y: townButton})" >{{town}}</li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="mb-3">
+                <label for="floatingInput" class="form-label fs-2 fw-semibold">Radius<sup>*</sup></label>
+                <p class="validator" *ngIf="radiusBox && radiusBox.invalid && radiusBox.touched"><small style="color: red;">Require input</small></p>
+                <input type="number" class="form-control" placeholder="Km" formControlName="radius"  #radius>
+            </div>
+            <button 
+            type="button" 
+            class="btn btn-secondary submit-button" 
+            [disabled]="FormValid.invalid"
+            (click) = "
+                getFormValues({
+                    campaignName: campaignName.value, 
+                    tags: tags,
+                    bid: bid.value,
+                    campaignFoud: campaignFoud.value,
+                    status: status.checked,
+                    townButton: townButton.value,
+                    radius: radius.value
+                })
+            ">Submit</button>
+            <p>
+                <small class="form-text text-muted">*-Required.</small>
+            </p>
+        </form>
+        <span class="section-separator"></span>        
+    </section>
+</div>
+<div id="card-content">
+    <div class="card w-100" *ngFor="let card of this.formValues">
+        <div class="card-body">
+            <h1 class="card-title"><b>{{card.campaignName}}</b></h1>
+            <button type="button" class="btn-close" id="close-button" aria-label="Close" (click)="removeCardElement(card)"></button>
+            <p class="card-text">{{card.tags}}<p>
+            <div id="price-holder">
+                <div id="price-status">
+                    <p class="card-text">Bid amount: <b>{{card.bid}}</b> EUR</p>
+                    <p class="card-text">Actual campaning Fund: <b>{{card.campaignFoud}}</b> EUR</p>
+                    <p class="card-text">Status: <b>{{card.status? 'Active':'Disabled'}}</b><p>
+                </div>
+                <div id="set-price-box">
+                    <p>Set value to subtract</p>
+                    <input type="number" class="form-control" #pricetochange>
+                    <button type="button" class="btn btn-secondary submit-button" (click)="changePrice({price: pricetochange.value, card: card})">Subtract</button>
+                </div>
+            </div>
+            <div id="town-range-info">
+                <p class="card-text" *ngIf="card.townButton !== true">Town: <b>{{card.townButton}}</b></p>
+                <p class="card-text"> Range: <b>{{card.radius}}</b> Km</p>
+            </div>
+        </div>
+            {{card.lenght}}
+      </div>
+</div>

@@ -1,0 +1,201 @@
+$MaxHeightPc: 900px
+$MaxWidthPc: 1200px
+$CardWrapWidth: 700px
+
+body
+    background-image: linear-gradient(#23272F, #202121)
+    background-repeat: no-repeat
+    background-attachment: fixed
+    font-family: 'Rubik', sans-serif
+    overflow-x: hidden
+
+::-webkit-scrollbar 
+  width: 15px
+  background-image: linear-gradient(#23272F, #202121)
+
+::-webkit-scrollbar-track 
+   box-shadow: 0 0 10px gray, inset 0 0 15px black
+   border: 1px solid black
+   border-radius: 5px
+
+::-webkit-scrollbar-thumb 
+  background: black
+  box-shadow: inset 0 0 3px white
+  border-radius: 5px
+
+::-webkit-scrollbar-thumb:hover 
+  box-shadow: inset 0 0 10px black
+    
+app-root
+    display: flex
+    @media screen and (max-width: $MaxWidthPc)
+        margin: 40px 0 0 0
+        flex-wrap: wrap
+
+#form-content
+    display: flex
+    section 
+        position: sticky
+        top: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 40vw
+        height: 100vh
+        @media screen and (max-width: $MaxWidthPc)
+            flex-wrap: wrap
+            width: 100vw
+            align-items: flex-start 
+            height: 100%
+        @media screen and (max-height: $MaxHeightPc ) and (min-width: $MaxWidthPc)
+            height: 100%
+            align-items: flex-start
+            margin-top: 20px
+            overflow: auto
+    
+.submit-button
+    transition: transform .2s
+    &:hover
+        transform: translateY(-2px)
+    &:active
+        box-shadow: none !important
+        transform: translateY(0)
+        background-color: #6c757d
+    &:focus
+        box-shadow: none
+        background-color: #6c757d
+
+form
+    width: 90%
+    padding: 0 80px 0 40px
+    div
+        color: white
+        text-shadow: 0 0 10px black
+        p
+            margin: 0
+    input
+        box-shadow: 0 0 10px black
+        &:focus
+            border: solid 1px white !important
+            box-shadow: 0 0 10px white !important
+    @media screen and (max-width: $MaxWidthPc)
+        padding: 0 40px 0 40px
+    
+    #town-switcher
+        div
+            display: flex
+            input
+                border-top-right-radius: 0
+                border-bottom-right-radius: 0
+            button
+                border-top-left-radius: 0
+                border-bottom-left-radius: 0
+                &:focus
+                    box-shadow: none 
+            ul
+                overflow: auto
+                max-height: 100px
+                margin: 0
+                &::-webkit-scrollbar 
+                    width: 15px
+                    background-color: black
+                &::-webkit-scrollbar-thumb:hover 
+                    border: 1px solid white
+                li
+                    &:not(:first-child)
+                        border-top: solid 1px black
+                    &:hover
+                        cursor: pointer
+                        box-shadow: 0 0 0 white !important
+                    &:focus
+                        
+                    &:active
+                        background-color: #6c757d
+    #switch-box
+        input
+            margin-right: 10px
+            margin-top: 10px
+            width: 60px
+            height: 30px
+            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(161, 161, 161,1)'/></svg>")
+            &:checked
+                background-color: #3D4452
+                border-color: white
+
+.section-separator
+    color: white
+    height: 95vh
+    width: 4px
+    background: rgb(32,33,33)
+    background: linear-gradient(0deg, #202121 5%, rgba(255,255,255,1) 50%, #23272F 95%)
+    @media screen and (max-width: $MaxWidthPc)
+        height: 4px
+        width: 95vw
+        background: linear-gradient(90deg, rgba(32,33,33,1) 5%, rgba(255,255,255,1) 47%, rgba(32,33,33,1) 95%)
+    @media screen and (max-height: $MaxHeightPc)
+        position: sticky
+        top: 0
+
+sup
+    font-family: Arial 
+    font-size: 0.7em
+    font-weight: normal
+
+#card-content
+    width: 60vw
+    display: flex
+    flex-wrap: wrap
+    padding: 0 40px 0 0
+    align-content: flex-start
+    @media screen and (max-width: $MaxWidthPc)
+        align-items: flex-end
+        width: 100vw
+        padding: 0 40px 0 20px 
+    .card
+        box-shadow: 0 0 10px white
+        display: flex
+        margin: 20px 40px 20px 40px
+        &:is(:first-child)
+            margin: 40px 40px 20px 40px
+        @media screen and (max-width: $MaxWidthPc)
+            margin: 20px 20px 20px 20px
+            &:is(:first-child)
+                margin: 40px 20px 20px 20px
+        .card-body
+            display: flex
+            flex-direction: column
+            position: relative
+            justify-content: center
+            align-content: center
+            text-align: center
+            #town-range-info
+                display: flex
+                justify-content: center
+                align-items: center
+                p
+                    margin: 0
+                    &:is(:first-child)
+                        margin: 0 10px 0 0 
+            #close-button
+                position: absolute
+                top: 0
+                right: 0
+                margin: 10px
+                &:focus
+                    border: none 
+                    box-shadow: none 
+            #price-holder
+                display: flex
+                justify-content: space-around
+                @media screen and (max-width: $CardWrapWidth)
+                    flex-direction: column
+                #set-price-box
+                    button
+                        margin: 20px
+                #price-status
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    justify-content: center
+        
+        
