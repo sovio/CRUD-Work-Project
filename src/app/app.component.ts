@@ -12,7 +12,7 @@ export class AppComponent {
   TownList = ['Town1', 'Town2', 'Town3', 'Town4', 'Town5']
   TagList = ['Tag1', 'Tag2', 'Tag3', 'Tag4']
   TagString = `${this.TagList[this.getRandomInt(0,this.TagList.length)]}, ${this.TagList[this.getRandomInt(0,this.TagList.length)]}`
-  formValues = JSON.parse(localStorage.getItem("formValues") || "")
+  formValues = localStorage.getItem("formValues") !== null ? JSON.parse(localStorage.getItem("formValues") || "") : []
 
   FormValid = new FormGroup({
     campaignname:new FormControl('',[Validators.required]),
